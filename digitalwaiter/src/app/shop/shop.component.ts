@@ -17,11 +17,11 @@ export class ShopComponent implements OnInit {
 
     ngOnInit(): void {
         this.links = [
-            {name: this.dishTypes.main, path: ''},
-            {name: this.dishTypes.soups, path: ''},
-            {name: this.dishTypes.deserts, path: ''},
-            {name: this.dishTypes.spaghetti, path: ''},
-            {name: this.dishTypes.drinks, path: ''}
+            {name: this.dishTypes.main},
+            {name: this.dishTypes.soups},
+            {name: this.dishTypes.deserts},
+            {name: this.dishTypes.spaghetti},
+            {name: this.dishTypes.drinks}
         ];
     }
 

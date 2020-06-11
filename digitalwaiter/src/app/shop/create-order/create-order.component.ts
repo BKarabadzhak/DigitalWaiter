@@ -14,8 +14,8 @@ export class CreateOrderComponent implements OnInit {
       private clickedHeaderService: ClickedHeaderService
   ) {
       this.clickedHeaderService.clickedObs.subscribe((link: Link) => {
-
-      })
+          console.log(link);
+      });
   }
 
     public dishTypes = DishTypes;
