@@ -1,4 +1,13 @@
 .card {
-  width: 320px;
-  height: 420px;
+    width: 320px;
+    height: 420px;
+}
+
+.card-text {
+    overflow: auto;
+}
+
+img {
+    min-height: 100px;
+    max-height: 110px;
 }

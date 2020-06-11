@@ -43,6 +43,7 @@ export class HeaderComponent implements OnInit {
     }
 
     clickOnItem(link: Link) {
+        this.clickOnLink(link);
         this.clickService.sendClick(link);
     }
 

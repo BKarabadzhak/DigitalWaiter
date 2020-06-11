@@ -1,24 +1,27 @@
 <div class="card" *ngIf="dish">
-  <div class="card-header">
-    {{dish.name}}
-  </div>
-  <div class="card-block">
-    <img [src]="dish.imgUrl" />
-    <div class="card-text">
-      {{dish.description}}
+    <div class="card-header">
+        {{dish.name}}
     </div>
-    <div class="card-text">
-      Ingredients: <ng-template *ngFor="let ingredient of dish.ingredients">{{ingredient}} </ng-template>
+    <div class="card-img">
+        <img [src]="dish.imgUrl"/>
     </div>
-    <div class="card-text">
-      {{dish.price}}
+    <div class="card-block">
+        <div class="card-text">
+            {{dish.description}}
+        </div>
+        <div class="card-text">
+            Ingredients:
+            <ng-template *ngFor="let ingredient of dish.ingredients">{{ingredient}} </ng-template>
+        </div>
+        <div class="card-text">
+            {{dish.price}}
+        </div>
     </div>
-  </div>
-  <div class="card-footer" *ngIf="!isAdminView">
-    <button class="btn btn-sm btn-link">Add to order</button>
-  </div>
-  <div class="card-footer" *ngIf="isAdminView">
-    <button class="btn btn-sm btn-link">Delete</button>
-    <button class="btn btn-sm btn-link">Change</button>
-  </div>
+    <div class="card-footer" *ngIf="!isAdminView">
+        <button class="btn btn-sm btn-link">Add to order</button>
+    </div>
+    <div class="card-footer" *ngIf="isAdminView">
+        <button class="btn btn-sm btn-link">Delete</button>
+        <button class="btn btn-sm btn-link">Change</button>
+    </div>
 </div>

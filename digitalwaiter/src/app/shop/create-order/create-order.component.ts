@@ -24,7 +24,7 @@ export class CreateOrderComponent implements OnInit {
     ngOnInit(): void {
         this.dishCards = [
             {name: 'Spicy Pork Tenderloin with Apples and Potatoes', description: 'Jazz up your pork tenderloin with this spicy-sweet combo of apples, cider, sweet potatoes, and as much or as little heat as your palate requires!', price: 30, ingredients: ['cooking spray', 'tablespoon ground ginger',
-                'tablespoon light brown sugar', 'tablespoons butter'], imgUrl: './assets/', type: this.dishTypes.main}
+                'tablespoon light brown sugar', 'tablespoons butter'], imgUrl: './assets/pork.jpg', type: this.dishTypes.main}
         ];
     }
 

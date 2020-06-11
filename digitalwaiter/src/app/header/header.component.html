@@ -1,6 +1,6 @@
 <header class="header header-6">
     <div class="header-nav">
-        <ng-template *ngFor="let item of links">
+        <div *ngFor="let item of links">
             <a class="nav-link nav-text"
                *ngIf="item.path"
                [class.active]="item.active"
@@ -15,7 +15,7 @@
                (click)="clickOnItem(item)">
                 {{item.name}}
             </a>
-        </ng-template>
+        </div>
     </div>
 </header>
 <div class="main-container">
