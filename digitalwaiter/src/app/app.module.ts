@@ -7,12 +7,10 @@ import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ShopModule} from './shop/shop.module';
 import {AdminModule} from './admin/admin.module';
-import { DishCardComponent } from './dish-card/dish-card.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DishCardComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

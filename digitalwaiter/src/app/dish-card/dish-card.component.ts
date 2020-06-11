@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 export enum DishTypes {
-    "Main",
-    "Soups",
-    "Drinks",
-    "Deserts",
-    "Spaghetti"
+    "main" = "Main",
+    "soups" = "Soups",
+    "drinks" = "Drinks" ,
+    "deserts" = "Deserts",
+    "spaghetti" = "Spaghetti"
 }
 
 export interface Dish {
