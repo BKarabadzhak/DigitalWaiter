@@ -1,0 +1,32 @@
+<div *ngIf="confirmedIsVisible">
+<clr-datagrid>
+    <clr-dg-action-bar>
+        <button class="btn btn-sm btn-primary" (click)="showConfirmed()">Confirmed</button>
+        <button class="btn btn-link btn-sm" (click)="showUnconfirmed()">Unconfirmed</button>
+    </clr-dg-action-bar>
+    <clr-dg-column>
+        Test 1
+    </clr-dg-column>
+    <clr-dg-row *clrDgItems="let type of listService.confirmed"
+                [clrDgItem]="type">
+        <clr-dg-cell>{{type}}</clr-dg-cell>
+    </clr-dg-row>
+</clr-datagrid>
+</div>
+
+<div *ngIf="!confirmedIsVisible">
+    <clr-datagrid [(clrDgSingleSelected)]="selectedDish">
+        <clr-dg-action-bar>
+            <button class="btn btn-link btn-sm" (click)="showConfirmed()">Confirmed</button>
+            <button class="btn btn-sm btn-primary" (click)="showUnconfirmed()">Unconfirmed</button>
+            <button type="button" class="btn btn-sm btn-secondary" (click)="onEdit()" *ngIf="selectedDish"><clr-icon shape="pencil"></clr-icon> Edit</button>
+        </clr-dg-action-bar>
+        <clr-dg-column>
+            Test 1
+        </clr-dg-column>
+        <clr-dg-row *clrDgItems="let type of listService.unconfirmed"
+                    [clrDgItem]="type">
+            <clr-dg-cell>{{type}}</clr-dg-cell>
+        </clr-dg-row>
+    </clr-datagrid>
+</div>

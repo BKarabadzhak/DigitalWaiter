@@ -6,6 +6,7 @@ import {ShopComponent} from './shop.component';
 import {CreateOrderComponent} from './create-order/create-order.component';
 import {ContainerModule} from '../header/container.module';
 import {DishCardModule} from "../dish-card/dish-card.module";
+import { ListComponent } from './list/list.component';
 
 const routes: Routes = [
     {
@@ -17,7 +18,8 @@ const routes: Routes = [
                 redirectTo: "create-order",
                 pathMatch: "full"
             },
-            {path: 'create-order', component: CreateOrderComponent}
+            {path: 'create-order', component: CreateOrderComponent},
+            {path: 'list', component: ListComponent}
         ]
     }
 ];
@@ -25,7 +27,8 @@ const routes: Routes = [
 @NgModule({
     declarations: [
         ShopComponent,
-        CreateOrderComponent
+        CreateOrderComponent,
+        ListComponent
     ],
     imports: [
         CommonModule,
