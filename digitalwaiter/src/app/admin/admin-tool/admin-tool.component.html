@@ -3,5 +3,8 @@
         <app-dish-card *ngFor="let dish of dishes" [dish]="dish" isAdminView="true"></app-dish-card>
     </div>
     <div class="col-md-5">
+        <input type="text" class="clr-col-12">
+        <br/>
+        <input type="checkbox" name="dishType" class="checkbox" *ngFor="let type of dishTypes">
     </div>
 </div>

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Dish} from "../../dish-card/dish-card.component";
+import {Dish, DishTypes} from "../../dish-card/dish-card.component";
 
 @Component({
     selector: 'app-admin-tool',
@@ -7,6 +7,7 @@ import {Dish} from "../../dish-card/dish-card.component";
 })
 export class AdminToolComponent implements OnInit {
 
+    public dishTypes = DishTypes;
     public dishes: Dish[];
 
     constructor() {
