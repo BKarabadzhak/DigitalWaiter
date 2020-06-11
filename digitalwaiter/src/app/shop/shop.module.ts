@@ -9,7 +9,9 @@ import {DishCardModule} from "../dish-card/dish-card.module";
 
 const routes: Routes = [
     {
-        path: 'shop', component: ShopComponent
+        path: 'shop', component: ShopComponent, children: [
+            {path: 'createOrder', component: CreateOrderComponent}
+        ]
     }
 ];
 

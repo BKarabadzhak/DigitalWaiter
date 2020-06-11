@@ -3,7 +3,7 @@ import {ClickedHeaderService} from "./clicked-header.service";
 
 export interface Link {
     name: string;
-    path: string;
+    path?: string;
     active?: boolean;
 }
 

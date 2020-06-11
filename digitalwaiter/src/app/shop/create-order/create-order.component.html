@@ -1,1 +1,6 @@
-<p>Order</p>
+<app-dish-card
+    *ngFor="let dish of dishCards"
+    [dish]="dish"
+    [isAdminView]="false"
+>
+</app-dish-card>

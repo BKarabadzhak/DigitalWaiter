@@ -11,7 +11,6 @@ export class ShopComponent implements OnInit {
 
     public links: Link[];
     public dishTypes = DishTypes;
-    public dishCards: Dish[];
 
     constructor() {
     }
