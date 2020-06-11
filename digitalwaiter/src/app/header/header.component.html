@@ -1,18 +1,27 @@
 <header class="header header-6">
-  <div class="header-nav">
-    <a class="nav-link nav-text"
-       [class.active]="item.active"
-       *ngFor="let item of links"
-       (click)="clickOnLink(item)"
-       [routerLink]="item.path">
-      {{item.name}}
-    </a>
-  </div>
+    <div class="header-nav">
+        <ng-template *ngFor="let item of links">
+            <a class="nav-link nav-text"
+               *ngIf="item.path"
+               [class.active]="item.active"
+               (click)="clickOnLink(item)"
+               [routerLink]="item.path">
+                {{item.name}}
+            </a>
+
+            <a class="nav-link nav-text"
+               *ngIf="!item.path"
+               [class.active]="item.active"
+               (click)="clickOnItem(item)">
+                {{item.name}}
+            </a>
+        </ng-template>
+    </div>
 </header>
 <div class="main-container">
-  <div class="content-container">
-    <div class="content-area">
-      <ng-content></ng-content>
+    <div class="content-container">
+        <div class="content-area">
+            <ng-content></ng-content>
+        </div>
     </div>
-  </div>
 </div>

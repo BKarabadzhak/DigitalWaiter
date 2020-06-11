@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ClickedHeaderService} from "./clicked-header.service";
 
 export interface Link {
     name: string;
@@ -16,7 +17,9 @@ export class HeaderComponent implements OnInit {
     private lastLink: Link;
     private _links: Link[];
 
-    constructor() {
+    constructor(
+        private clickService: ClickedHeaderService
+    ) {
     }
 
     @Input()
@@ -37,6 +40,10 @@ export class HeaderComponent implements OnInit {
         link.active = true;
         this.lastLink.active = false;
         this.lastLink = link;
+    }
+
+    clickOnItem(link: Link) {
+        this.clickService.sendClick(link);
     }
 
 }
