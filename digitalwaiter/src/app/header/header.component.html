@@ -1,7 +1,9 @@
 <header class="header header-6">
-  <li class="nav-item" *ngFor="let item of links">
-    <a class="nav-link nav-text" [routerLink]="[item.path]">{{item.name}}</a>
-  </li>
+  <div class="header-nav">
+    <a class="nav-link nav-text" *ngFor="let item of links" [routerLink]="item.path">
+      {{item.name}}
+    </a>
+  </div>
 </header>
 <div class="main-container">
   <div class="content-container">
