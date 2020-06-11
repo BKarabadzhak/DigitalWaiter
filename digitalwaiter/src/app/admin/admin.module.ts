@@ -8,7 +8,21 @@ import {AdminToolComponent} from './admin-tool/admin-tool.component';
 import {DishCardModule} from "../dish-card/dish-card.module";
 
 const routes: Routes = [
-    {path: 'admin', component: AdminComponent}
+    {
+        path: 'admin',
+        component: AdminComponent,
+        children: [
+            {
+                path:"",
+                redirectTo: "general",
+                pathMatch: "full"
+            },
+            {
+                path: "general",
+                component: AdminToolComponent
+            }
+        ]
+    }
 ];
 
 @NgModule({

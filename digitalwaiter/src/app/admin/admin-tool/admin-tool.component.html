@@ -1,10 +1,43 @@
+<button class="btn btn-outline">Add new Dish</button>
 <div class="clr-row">
-    <div class="col-md-7">
+    <div class="clr-col-md-7">
         <app-dish-card *ngFor="let dish of dishes" [dish]="dish" isAdminView="true"></app-dish-card>
     </div>
-    <div class="col-md-5">
-        <input type="text" class="clr-col-12">
+    <div class="clr-col-md-5">
+        <clr-input-container class="clr-col-md-12">
+            <label>Search</label>
+            <input clrInput name="name" />
+        </clr-input-container>
         <br/>
-        <input type="checkbox" name="dishType" class="checkbox" *ngFor="let type of dishTypes">
+
+        <clr-datagrid [(clrDgSelected)]="selectedDishTypes" (click)="log(selectedDishTypes)">
+            <clr-dg-action-bar>
+                <button class="btn btn-link btn-sm">Add</button>
+                <button class="btn btn-link btn-sm" [disabled]="!selectedDishTypes.length" >Delete</button>
+            </clr-dg-action-bar>
+            <clr-dg-column>
+                Filter dishes by status
+            </clr-dg-column>
+            <clr-dg-row *clrDgItems="let type of dishTypes"
+                        [clrDgItem]="type">
+                <clr-dg-cell>{{type}}</clr-dg-cell>
+            </clr-dg-row>
+        </clr-datagrid>
+
+        <br>
+
+        <clr-datagrid [(clrDgSingleSelected)]="selectedPaymentType" (click)="log(selectedDishTypes)">
+            <clr-dg-action-bar>
+                <button class="btn btn-link btn-sm">Add</button>
+                <button class="btn btn-link btn-sm" [disabled]="!selectedPaymentType">Delete</button>
+            </clr-dg-action-bar>
+            <clr-dg-column>
+                Payment methods
+            </clr-dg-column>
+            <clr-dg-row *clrDgItems="let type of dishTypes"
+                        [clrDgItem]="type">
+                <clr-dg-cell>{{type}}</clr-dg-cell>
+            </clr-dg-row>
+        </clr-datagrid>
     </div>
 </div>
