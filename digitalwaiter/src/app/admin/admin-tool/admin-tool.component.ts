@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Dish} from "../../dish-card/dish-card.component";
 
 @Component({
-  selector: 'app-admin-tool',
-  templateUrl: './admin-tool.component.html'
+    selector: 'app-admin-tool',
+    templateUrl: './admin-tool.component.html'
 })
 export class AdminToolComponent implements OnInit {
 
-  constructor() { }
+    public dishes: Dish[];
 
-  ngOnInit(): void {
-  }
+    constructor() {
+    }
 
+    ngOnInit(): void {
+    }
 }

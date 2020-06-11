@@ -1,8 +1,7 @@
 <div class="clr-row">
-  <div class="col-md-7">
-
-  </div>
-  <div class="col-md-5">
-
-  </div>
+    <div class="col-md-7">
+        <app-dish-card *ngFor="let dish of dishes" [dish]="dish" isAdminView="true"></app-dish-card>
+    </div>
+    <div class="col-md-5">
+    </div>
 </div>
