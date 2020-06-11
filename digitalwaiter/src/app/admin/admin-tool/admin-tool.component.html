@@ -10,7 +10,7 @@
         </clr-input-container>
         <br/>
 
-        <clr-datagrid [(clrDgSelected)]="selectedDishTypes" (click)="log(selectedDishTypes)">
+        <clr-datagrid [(clrDgSelected)]="selectedDishTypes">
             <clr-dg-action-bar>
                 <button class="btn btn-link btn-sm">Add</button>
                 <button class="btn btn-link btn-sm" [disabled]="!selectedDishTypes.length" >Delete</button>
@@ -26,7 +26,7 @@
 
         <br>
 
-        <clr-datagrid [(clrDgSingleSelected)]="selectedPaymentType" (click)="log(selectedDishTypes)">
+        <clr-datagrid [(clrDgSingleSelected)]="selectedPaymentType">
             <clr-dg-action-bar>
                 <button class="btn btn-link btn-sm">Add</button>
                 <button class="btn btn-link btn-sm" [disabled]="!selectedPaymentType">Delete</button>
