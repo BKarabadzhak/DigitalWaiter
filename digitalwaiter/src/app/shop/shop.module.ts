@@ -16,6 +16,7 @@ const routes: Routes = [
     CommonModule,
     ClarityModule,
     RouterModule.forChild(routes)
-  ]
+  ],
+  exports: [RouterModule]
 })
 export class ShopModule { }
