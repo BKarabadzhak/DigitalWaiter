@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Link} from '../header/header.component';
-import {Dish, DishTypes} from '../dish-card/dish-card.component';
+import {DataService} from "../data.service";
 
 @Component({
     selector: 'app-shop',
@@ -10,19 +10,22 @@ import {Dish, DishTypes} from '../dish-card/dish-card.component';
 export class ShopComponent implements OnInit {
 
     public links: Link[];
-    public dishTypes = DishTypes;
 
-    constructor() {
+    constructor(
+        private dataService: DataService
+    ) {
     }
 
     ngOnInit(): void {
-        this.links = [
-            {name: this.dishTypes.main},
-            {name: this.dishTypes.soups},
-            {name: this.dishTypes.deserts},
-            {name: this.dishTypes.spaghetti},
-            {name: this.dishTypes.drinks}
-        ];
+        this.links = new Array<Link>();
+        this.dataService.typesObs
+            .subscribe(types => {
+                types.forEach(type => {
+                    this.links.push({
+                        name: type.toUpperCase()
+                    })
+                })
+            })
     }
 
 }

@@ -1,21 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CardService} from '../shop/card.service';
 
-export enum DishTypes {
-    "main" = "Main",
-    "soups" = "Soups",
-    "drinks" = "Drinks" ,
-    "deserts" = "Deserts",
-    "spaghetti" = "Spaghetti"
-}
-
 export interface Dish {
     name: string;
     description: string;
     price: number;
     imgUrl: string;
     ingredients: string[];
-    type: DishTypes;
+    type: string;
 }
 
 @Component({

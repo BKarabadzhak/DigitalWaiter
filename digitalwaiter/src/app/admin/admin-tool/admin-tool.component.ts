@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Dish, DishTypes} from "../../dish-card/dish-card.component";
+import {Dish} from "../../dish-card/dish-card.component";
 import {DataService} from "../../data.service";
 import {fromEvent, Subscription} from "rxjs";
-import {debounce, debounceTime} from "rxjs/operators";
+import {debounceTime} from "rxjs/operators";
 
 @Component({
     selector: 'app-admin-tool',
@@ -11,17 +11,17 @@ import {debounce, debounceTime} from "rxjs/operators";
 })
 export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
 
-    public dishTypes = Object.keys(DishTypes);
+    public dishTypes: string[];
     public dishes: Dish[];
     public immutableDishes: Dish[];
     public selectedPaymentType;
 
-    public set selectedDishType(type: DishTypes) {
+    public set selectedDishType(type: string) {
         this.filterByType(type)
         this._selectedDishType = type;
     }
 
-    public get selectedDishType(): DishTypes {
+    public get selectedDishType(): string {
         return this._selectedDishType;
     }
 
@@ -29,7 +29,7 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild("search") private searchInputField: ElementRef<HTMLInputElement>;
 
     private subs = new Array<Subscription>();
-    private _selectedDishType: DishTypes;
+    private _selectedDishType: string;
 
     constructor(
         private dataService: DataService
@@ -40,6 +40,10 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
             this.dishes = dishes;
             this.immutableDishes = dishes;
         });
+
+        let typeSub = this.dataService.typesObs.subscribe(types => {
+            this.dishTypes= types;
+        })
 
         this.subs.push(sub);
     }
@@ -79,6 +83,6 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
 
         this.dishes = this.immutableDishes.filter((dish: Dish) => {
             return dish.name.toLowerCase().includes(value.toLowerCase());
-        })
+        });
     }
 }
