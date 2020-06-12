@@ -56,6 +56,8 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
             });
 
         this.subs.push(eventSub);
+
+        this.dataService.allIngredients.subscribe(this.log)
     }
 
     ngOnDestroy(): void {
@@ -63,7 +65,7 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     log(type) {
-        console.dir(type)
+        console.log(type)
     }
 
     filterByType(type: string) {

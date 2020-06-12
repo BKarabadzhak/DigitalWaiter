@@ -12,12 +12,18 @@ export class DataService {
     private typesSubj: BehaviorSubject<string[]>;
     public typesObs: Observable<string[]>
 
+    private allIngredientsSubj: BehaviorSubject<string[]>;
+    public allIngredients: Observable<string[]>
+
     constructor() {
         this.dishesSubj = new BehaviorSubject<Dish[]>(this.prepareFirstData());
         this.dishesObs = this.dishesSubj.asObservable();
 
         this.typesSubj = new BehaviorSubject<string[]>(this.prepareFirstDishTypes());
         this.typesObs = this.typesSubj.asObservable();
+
+        this.allIngredientsSubj = new BehaviorSubject<string[]>(this.prepareIngredients());
+        this.allIngredients = this.allIngredientsSubj.asObservable();
     }
 
     private prepareFirstData(): Dish[] {
@@ -34,6 +40,21 @@ export class DataService {
             "deserts",
             "spaghetti",
         ]
+    }
+
+    private prepareIngredients(): string[] {
+        let ingredientsSet = new Set<string>();
+        this.prepareFirstData().forEach((dish) => {
+            if(!dish.ingredients || !dish.ingredients.length) {
+                return;
+            }
+
+            dish.ingredients.forEach(ingr => {
+                ingredientsSet.add(ingr);
+            });
+        });
+
+        return Array.from<string>(ingredientsSet);
     }
 
     public updateDishesArray(newArray: Dish[]) {
