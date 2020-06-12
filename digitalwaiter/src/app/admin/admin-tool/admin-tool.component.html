@@ -12,13 +12,13 @@
         </clr-input-container>
         <br/>
 
-        <clr-datagrid [(clrDgSelected)]="selectedDishTypes">
+        <clr-datagrid [(clrDgSingleSelected)]="selectedDishType">
             <clr-dg-action-bar>
                 <button class="btn btn-link btn-sm">Add</button>
-                <button class="btn btn-link btn-sm" [disabled]="!selectedDishTypes.length">Delete</button>
+                <button class="btn btn-link btn-sm" [disabled]="!selectedDishType">Delete</button>
             </clr-dg-action-bar>
             <clr-dg-column>
-                Filter dishes by status
+                Filter dishes by type
             </clr-dg-column>
             <clr-dg-row *clrDgItems="let type of dishTypes"
                         [clrDgItem]="type">
