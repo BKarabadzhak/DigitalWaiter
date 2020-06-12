@@ -13,12 +13,15 @@ export class CardService {
     }
 
     public addToCard(item: Dish) {
-        const itemRef =  JSON.parse(JSON.stringify(item));
+        const itemRef = JSON.parse(JSON.stringify(item));
         this.dishesInCardUnconfirmed.push(itemRef);
     }
 
     public removeFromCard(item: Dish) {
-        this.dishesInCardUnconfirmed = this.dishesInCardUnconfirmed.filter(i => i.name !== item.name);
+        const index = this.dishesInCardUnconfirmed.indexOf(item);
+        if (index !== -1) {
+            this.dishesInCardUnconfirmed.splice(index, 1);
+        }
     }
 
     public changeStatusOfSelectedUnconfirmedDishes(items: Dish[]) {
