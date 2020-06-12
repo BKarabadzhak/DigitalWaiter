@@ -17,11 +17,18 @@ export class CardService {
         this.dishesInCardUnconfirmed.push(itemRef);
     }
 
-    public removeFromCard(item: Dish) {
+    public addIngredients(item: Dish, ingredients: string[]) {
         const index = this.dishesInCardUnconfirmed.indexOf(item);
-        if (index !== -1) {
-            this.dishesInCardUnconfirmed.splice(index, 1);
-        }
+        this.dishesInCardUnconfirmed[index].ingredients.push(...ingredients);
+    }
+
+    public removeFromCard(items: Dish[]) {
+        items.forEach((item) => {
+            const index = this.dishesInCardUnconfirmed.indexOf(item);
+            if (index !== -1) {
+                this.dishesInCardUnconfirmed.splice(index, 1);
+            }
+        });
     }
 
     public changeStatusOfSelectedUnconfirmedDishes(items: Dish[]) {

@@ -14,6 +14,7 @@ export class ListComponent implements OnInit {
 
     public selectedDishes: Dish[] = [];
     public confirmedIsVisible = true;
+    public modalOpen = false;
 
     constructor(public card: CardService, private clickedHeaderService: ClickedHeaderService, private router: Router) {
         this.clickedHeaderService.clickedObs.subscribe((link: Link) => {
@@ -30,10 +31,11 @@ export class ListComponent implements OnInit {
 
     showUnconfirmed() {
         this.confirmedIsVisible = false;
+        this.selectedDishes = [];
     }
 
     onEdit() {
-        console.log(this.selectedDishes);
+        this.modalOpen = true;
     }
 
     addNewDish() {
@@ -41,7 +43,7 @@ export class ListComponent implements OnInit {
     }
 
     onDelete() {
-        this.card.removeFromCard(this.selectedDishes[0]);
+        this.card.removeFromCard(this.selectedDishes);
     }
 
     confirmSelectedDishes() {
@@ -50,5 +52,13 @@ export class ListComponent implements OnInit {
 
     confirmAllDishes() {
         this.card.changeStatusOfAllUnconfirmedDishes();
+    }
+
+    closeModal(b: boolean) {
+        this.modalOpen = b;
+    }
+
+    addIngredientsToDish(ing: string[]) {
+        this.card.addIngredients(this.selectedDishes[0], ing);
     }
 }

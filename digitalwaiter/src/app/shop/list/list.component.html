@@ -30,10 +30,10 @@
             <button type="button" class="btn btn-sm btn-secondary" (click)="onEdit()"
                     *ngIf="selectedDishes?.length === 1">
                 <clr-icon shape="pencil"></clr-icon>
-                Edit
+                Edit components
             </button>
             <button type="button" class="btn btn-sm btn-secondary" (click)="onDelete()"
-                    *ngIf="selectedDishes?.length === 1">
+                    *ngIf="selectedDishes.length">
                 <clr-icon shape="times"></clr-icon>
                 Delete
             </button>
@@ -58,8 +58,14 @@
 
     <div>
         <button class="btn btn-sm btn-primary" (click)="addNewDish()">+ Add new dish</button>
-        <button class="btn btn-sm btn-primary" (click)="confirmAllDishes()">Confirm all dishes</button>
+        <button class="btn btn-sm btn-primary" *ngIf="selectedDishes" (click)="confirmAllDishes()">Confirm all dishes
+        </button>
     </div>
 </div>
 
+<app-ingredients-modal
+    [modalOpen]="modalOpen"
+    (modalOpenOutput)="closeModal($event)"
+    (selectedIngredientsOutput)="addIngredientsToDish($event)"
 
+></app-ingredients-modal>

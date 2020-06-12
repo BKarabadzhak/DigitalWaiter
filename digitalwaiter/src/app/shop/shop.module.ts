@@ -7,6 +7,7 @@ import {CreateOrderComponent} from './create-order/create-order.component';
 import {ContainerModule} from '../header/container.module';
 import {DishCardModule} from "../dish-card/dish-card.module";
 import { ListComponent } from './list/list.component';
+import { IngredientsModalComponent } from './ingredients-modal/ingredients-modal.component';
 
 const routes: Routes = [
     {
@@ -19,7 +20,9 @@ const routes: Routes = [
                 pathMatch: "full"
             },
             {path: 'create-order', component: CreateOrderComponent},
-            {path: 'list', component: ListComponent}
+            {path: 'list', component: ListComponent, children: [
+                    {path: 'ingredients', component: IngredientsModalComponent}
+                ]}
         ],
     }
 ];
@@ -28,7 +31,8 @@ const routes: Routes = [
     declarations: [
         ShopComponent,
         CreateOrderComponent,
-        ListComponent
+        ListComponent,
+        IngredientsModalComponent
     ],
     imports: [
         CommonModule,
