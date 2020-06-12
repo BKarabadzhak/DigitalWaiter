@@ -60,6 +60,10 @@ export class DataService {
     public updateDishesArray(newArray: Dish[]) {
         this.dishesSubj.next(newArray);
     }
+
+    public updateDishTypesArray(newArray: string[]) {
+        this.typesSubj.next(newArray);
+    }
 }
 
 function compareDishes(a, b) {

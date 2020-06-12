@@ -23,9 +23,9 @@ export class ShopComponent implements OnInit {
                 types.forEach(type => {
                     this.links.push({
                         name: type.toUpperCase()
-                    })
-                })
-            })
+                    });
+                });
+            });
     }
 
 }

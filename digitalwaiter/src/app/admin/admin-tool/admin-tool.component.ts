@@ -3,6 +3,7 @@ import {Dish} from "../../dish-card/dish-card.component";
 import {DataService} from "../../data.service";
 import {fromEvent, Subscription} from "rxjs";
 import {debounceTime} from "rxjs/operators";
+import {SaveModalComponent} from "../../save-modal/save-modal.component";
 
 @Component({
     selector: 'app-admin-tool',
@@ -27,6 +28,7 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
     @ViewChild("search") private searchInputField: ElementRef<HTMLInputElement>;
+    @ViewChild("newDishType") private addDishTypeModal: SaveModalComponent<HTMLFormElement>;
 
     private subs = new Array<Subscription>();
     private _selectedDishType: string;
@@ -56,8 +58,6 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
             });
 
         this.subs.push(eventSub);
-
-        this.dataService.allIngredients.subscribe(this.log)
     }
 
     ngOnDestroy(): void {
@@ -86,5 +86,14 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
         this.dishes = this.immutableDishes.filter((dish: Dish) => {
             return dish.name.toLowerCase().includes(value.toLowerCase());
         });
+    }
+
+    openNewDishModal() {
+        this.addDishTypeModal.openModal();
+    }
+
+    addNewDishType(value: HTMLInputElement) {
+        this.dishTypes.push(value['newDishType'].value);
+        this.dataService.updateDishTypesArray(this.dishTypes);
     }
 }
