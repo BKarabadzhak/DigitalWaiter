@@ -1,4 +1,4 @@
-<button (click)="moveToList()">Move to list</button>
+<button class="btn btn-outline" (click)="moveToList()">Move to list</button>
 
 <div class="clr-row">
     <app-dish-card *ngFor="let dish of dishCards" [dish]="dish" [isAdminView]="false"></app-dish-card>
