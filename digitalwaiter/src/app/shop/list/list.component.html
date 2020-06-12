@@ -58,7 +58,7 @@
 
     <div>
         <button class="btn btn-sm btn-primary" (click)="addNewDish()">+ Add new dish</button>
-        <button class="btn btn-sm btn-primary" *ngIf="selectedDishes" (click)="confirmAllDishes()">Confirm all dishes
+        <button class="btn btn-sm btn-primary" *ngIf="selectedDishes.length" (click)="confirmAllDishes()">Confirm all dishes
         </button>
     </div>
 </div>
