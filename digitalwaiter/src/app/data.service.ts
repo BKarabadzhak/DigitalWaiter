@@ -7,7 +7,10 @@ import {Dish} from "./dish-card/dish-card.component";
 })
 export class DataService {
     private dishesSubj: BehaviorSubject<Dish[]>;
-    public dishesObs: Observable<Dish[]>
+    public dishesObs: Observable<Dish[]>;
+
+    private typesSubj: BehaviorSubject<string[]>;
+    public typesObs: Observable<string[]>
 
     constructor() {
         this.dishesSubj = new BehaviorSubject<Dish[]>(this.prepareFirstData());
