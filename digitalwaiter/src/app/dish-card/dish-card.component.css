@@ -1,13 +1,12 @@
 .card {
     width: 320px;
-    height: 420px;
 }
 
 .card-text {
     overflow: auto;
 }
 
-img {
-    min-height: 100px;
-    max-height: 110px;
+:host {
+    margin-left: 1rem;
+    margin-right: 1rem;
 }

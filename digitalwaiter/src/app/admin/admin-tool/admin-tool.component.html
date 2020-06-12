@@ -1,19 +1,21 @@
 <button class="btn btn-outline">Add new Dish</button>
 <div class="clr-row">
     <div class="clr-col-md-7">
-        <app-dish-card *ngFor="let dish of dishes" [dish]="dish" isAdminView="true"></app-dish-card>
+        <div class="clr-row">
+            <app-dish-card *ngFor="let dish of dishes" [dish]="dish" isAdminView="true"></app-dish-card>
+        </div>
     </div>
     <div class="clr-col-md-5">
         <clr-input-container class="clr-col-md-12">
             <label>Search</label>
-            <input clrInput name="name" />
+            <input clrInput name="name"/>
         </clr-input-container>
         <br/>
 
         <clr-datagrid [(clrDgSelected)]="selectedDishTypes">
             <clr-dg-action-bar>
                 <button class="btn btn-link btn-sm">Add</button>
-                <button class="btn btn-link btn-sm" [disabled]="!selectedDishTypes.length" >Delete</button>
+                <button class="btn btn-link btn-sm" [disabled]="!selectedDishTypes.length">Delete</button>
             </clr-dg-action-bar>
             <clr-dg-column>
                 Filter dishes by status

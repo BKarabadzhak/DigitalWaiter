@@ -9,12 +9,14 @@
         <div class="card-text">
             {{dish.description}}
         </div>
-        <div class="card-text">
+        <div class="card-text" *ngIf="dish.ingredients">
             Ingredients:
-            <ng-template *ngFor="let ingredient of dish.ingredients">{{ingredient}} </ng-template>
+            <span *ngFor="let ingredient of dish.ingredients; let i = index">
+                {{ingredient}}<span *ngIf="i != dish.ingredients.length - 1">, </span>
+            </span>
         </div>
         <div class="card-text">
-            {{dish.price}}
+            <b>BGN</b> {{dish.price}}
         </div>
     </div>
     <div class="card-footer" *ngIf="!isAdminView">
