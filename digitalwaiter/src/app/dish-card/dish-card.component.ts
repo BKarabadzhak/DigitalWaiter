@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {CardService} from '../shop/card.service';
 
 export enum DishTypes {
     "main" = "Main",
@@ -27,10 +28,13 @@ export class DishCardComponent implements OnInit {
     @Input() public dish: Dish;
     @Input() public isAdminView = false;
 
-    constructor() {
+    constructor(private card: CardService) {
     }
 
     ngOnInit(): void {
     }
 
+    addOrder() {
+        this.card.addToCard(this.dish);
+    }
 }

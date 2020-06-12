@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Link} from '../../header/header.component';
 import {ClickedHeaderService} from '../../header/clicked-header.service';
 import {Dish, DishTypes} from '../../dish-card/dish-card.component';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-create-order',
@@ -11,7 +12,7 @@ import {Dish, DishTypes} from '../../dish-card/dish-card.component';
 export class CreateOrderComponent implements OnInit {
 
     constructor(
-        private clickedHeaderService: ClickedHeaderService
+        private clickedHeaderService: ClickedHeaderService, private router: Router
     ) {
         this.clickedHeaderService.clickedObs.subscribe((link: Link) => {
 
@@ -49,4 +50,7 @@ export class CreateOrderComponent implements OnInit {
         this.clickedHeaderService.sendClick(link);
     }
 
+    moveToList() {
+        this.router.navigate(['/shop/list']);
+    }
 }

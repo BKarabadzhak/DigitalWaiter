@@ -1,32 +1,57 @@
 <div *ngIf="confirmedIsVisible">
-<clr-datagrid>
-    <clr-dg-action-bar>
-        <button class="btn btn-sm btn-primary" (click)="showConfirmed()">Confirmed</button>
-        <button class="btn btn-link btn-sm" (click)="showUnconfirmed()">Unconfirmed</button>
-    </clr-dg-action-bar>
-    <clr-dg-column>
-        Test 1
-    </clr-dg-column>
-    <clr-dg-row *clrDgItems="let type of listService.confirmed"
-                [clrDgItem]="type">
-        <clr-dg-cell>{{type}}</clr-dg-cell>
-    </clr-dg-row>
-</clr-datagrid>
+    <clr-datagrid>
+        <clr-dg-action-bar>
+            <button class="btn btn-sm btn-primary" (click)="showConfirmed()">Confirmed</button>
+            <button class="btn btn-link btn-sm" (click)="showUnconfirmed()">Unconfirmed</button>
+        </clr-dg-action-bar>
+        <clr-dg-column>
+            Dishes
+        </clr-dg-column>
+        <clr-dg-row *clrDgItems="let type of card.dishesInCardConfirmed"
+                    [clrDgItem]="type">
+            <clr-dg-cell>{{type.name}}</clr-dg-cell>
+        </clr-dg-row>
+    </clr-datagrid>
+
+    <div>
+        <button class="btn btn-sm btn-primary" (click)="addNewDish()">+ Add new dish</button>
+    </div>
 </div>
 
 <div *ngIf="!confirmedIsVisible">
-    <clr-datagrid [(clrDgSingleSelected)]="selectedDish">
+    <clr-datagrid [(clrDgSelected)]="selectedDishes">
         <clr-dg-action-bar>
             <button class="btn btn-link btn-sm" (click)="showConfirmed()">Confirmed</button>
             <button class="btn btn-sm btn-primary" (click)="showUnconfirmed()">Unconfirmed</button>
-            <button type="button" class="btn btn-sm btn-secondary" (click)="onEdit()" *ngIf="selectedDish"><clr-icon shape="pencil"></clr-icon> Edit</button>
+            <button type="button" class="btn btn-sm btn-secondary" (click)="onEdit()"
+                    *ngIf="selectedDishes?.length === 1">
+                <clr-icon shape="pencil"></clr-icon>
+                Edit
+            </button>
+            <button type="button" class="btn btn-sm btn-secondary" (click)="onDelete()"
+                    *ngIf="selectedDishes?.length === 1">
+                <clr-icon shape="times"></clr-icon>
+                Delete
+            </button>
+            <button type="button" class="btn btn-sm btn-secondary" (click)="confirmSelectedDishes()"
+                    *ngIf="selectedDishes.length">
+                <clr-icon shape="check"></clr-icon>
+                Confirm selected dishes
+            </button>
         </clr-dg-action-bar>
         <clr-dg-column>
-            Test 1
+            Dishes
         </clr-dg-column>
-        <clr-dg-row *clrDgItems="let type of listService.unconfirmed"
+        <clr-dg-row *clrDgItems="let type of card.dishesInCardUnconfirmed"
                     [clrDgItem]="type">
-            <clr-dg-cell>{{type}}</clr-dg-cell>
+            <clr-dg-cell>{{type.name}}</clr-dg-cell>
         </clr-dg-row>
     </clr-datagrid>
+
+    <div>
+        <button class="btn btn-sm btn-primary" (click)="addNewDish()">+ Add new dish</button>
+        <button class="btn btn-sm btn-primary" (click)="confirmAllDishes()">Confirm all dishes</button>
+    </div>
 </div>
+
+

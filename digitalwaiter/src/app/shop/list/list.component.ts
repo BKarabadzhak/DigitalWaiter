@@ -1,38 +1,54 @@
-import { Component, OnInit } from '@angular/core';
-import {ListService} from './list.service';
+import {Component, OnInit} from '@angular/core';
 import {Dish} from '../../dish-card/dish-card.component';
 import {ClickedHeaderService} from '../../header/clicked-header.service';
 import {Link} from '../../header/header.component';
 import {Router} from '@angular/router';
+import {CardService} from '../card.service';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+    selector: 'app-list',
+    templateUrl: './list.component.html',
+    styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
 
-    public selectedDish: Dish;
+    public selectedDishes: Dish[] = [];
     public confirmedIsVisible = true;
 
-  constructor(public listService: ListService,  private clickedHeaderService: ClickedHeaderService, private router: Router) {
-      this.clickedHeaderService.clickedObs.subscribe((link: Link) => {
-          this.router.navigate(['/shop/create-order']);
-      });
-  }
+    constructor(public card: CardService, private clickedHeaderService: ClickedHeaderService, private router: Router) {
+        this.clickedHeaderService.clickedObs.subscribe((link: Link) => {
+            this.router.navigate(['/shop/create-order']);
+        });
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
-  showConfirmed() {
-      this.confirmedIsVisible = true;
-  }
+    showConfirmed() {
+        this.confirmedIsVisible = true;
+    }
 
-  showUnconfirmed() {
-    this.confirmedIsVisible = false;
-  }
+    showUnconfirmed() {
+        this.confirmedIsVisible = false;
+    }
 
     onEdit() {
-        console.log(this.selectedDish);
+        console.log(this.selectedDishes);
+    }
+
+    addNewDish() {
+        this.router.navigate(['/shop/create-order']);
+    }
+
+    onDelete() {
+        this.card.removeFromCard(this.selectedDishes[0]);
+    }
+
+    confirmSelectedDishes() {
+        this.card.changeStatusOfSelectedUnconfirmedDishes(this.selectedDishes);
+    }
+
+    confirmAllDishes() {
+        this.card.changeStatusOfAllUnconfirmedDishes();
     }
 }

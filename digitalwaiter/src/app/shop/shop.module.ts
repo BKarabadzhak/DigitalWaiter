@@ -20,8 +20,9 @@ const routes: Routes = [
             },
             {path: 'create-order', component: CreateOrderComponent},
             {path: 'list', component: ListComponent}
-        ]
-    }
+        ],
+    },
+    {path: '**', redirectTo: '/shop/create-order', pathMatch: 'full'}
 ];
 
 @NgModule({

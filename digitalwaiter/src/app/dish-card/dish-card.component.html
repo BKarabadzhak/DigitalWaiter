@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="card-footer" *ngIf="!isAdminView">
-        <button class="btn btn-sm btn-link">Add to order</button>
+        <button class="btn btn-sm btn-link" (click)="addOrder()">Add to order</button>
     </div>
     <div class="card-footer" *ngIf="isAdminView">
         <button class="btn btn-sm btn-link">Delete</button>
