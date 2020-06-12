@@ -6,6 +6,7 @@ import {ClarityModule} from '@clr/angular';
 import {ContainerModule} from "../header/container.module";
 import {AdminToolComponent} from './admin-tool/admin-tool.component';
 import {DishCardModule} from "../dish-card/dish-card.module";
+import {SaveModalModule} from "../save-modal/save-modal.module";
 
 const routes: Routes = [
     {
@@ -35,7 +36,8 @@ const routes: Routes = [
         ClarityModule,
         RouterModule.forChild(routes),
         ContainerModule,
-        DishCardModule
+        DishCardModule,
+        SaveModalModule
     ],
     exports: [RouterModule]
 })
