@@ -7,9 +7,13 @@
         <clr-dg-column>
             Dishes
         </clr-dg-column>
+        <clr-dg-column>
+            Ingredients
+        </clr-dg-column>
         <clr-dg-row *clrDgItems="let type of card.dishesInCardConfirmed"
                     [clrDgItem]="type">
             <clr-dg-cell>{{type.name}}</clr-dg-cell>
+            <clr-dg-cell>{{type.ingredients}}</clr-dg-cell>
         </clr-dg-row>
     </clr-datagrid>
 
@@ -42,9 +46,13 @@
         <clr-dg-column>
             Dishes
         </clr-dg-column>
+        <clr-dg-column>
+            Ingredients
+        </clr-dg-column>
         <clr-dg-row *clrDgItems="let type of card.dishesInCardUnconfirmed"
                     [clrDgItem]="type">
             <clr-dg-cell>{{type.name}}</clr-dg-cell>
+            <clr-dg-cell>{{type.ingredients}}</clr-dg-cell>
         </clr-dg-row>
     </clr-datagrid>
 
