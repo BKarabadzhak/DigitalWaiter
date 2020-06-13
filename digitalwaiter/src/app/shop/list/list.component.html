@@ -27,10 +27,15 @@
         <clr-dg-action-bar>
             <button class="btn btn-link btn-sm" (click)="showConfirmed()">Confirmed</button>
             <button class="btn btn-sm btn-primary" (click)="showUnconfirmed()">Unconfirmed</button>
-            <button type="button" class="btn btn-sm btn-secondary" (click)="onEdit()"
+            <button type="button" class="btn btn-sm btn-secondary" (click)="onAddIng()"
                     *ngIf="selectedDishes?.length === 1">
                 <clr-icon shape="pencil"></clr-icon>
-                Edit components
+                Add ingredients
+            </button>
+            <button type="button" class="btn btn-sm btn-secondary" (click)="onRemoveIng()"
+                    *ngIf="selectedDishes?.length === 1">
+                <clr-icon shape="pencil"></clr-icon>
+                Remove ingredients
             </button>
             <button type="button" class="btn btn-sm btn-secondary" (click)="onDelete()"
                     *ngIf="selectedDishes.length">
@@ -58,14 +63,17 @@
 
     <div>
         <button class="btn btn-sm btn-primary" (click)="addNewDish()">+ Add new dish</button>
-        <button class="btn btn-sm btn-primary" *ngIf="selectedDishes.length" (click)="confirmAllDishes()">Confirm all dishes
+        <button class="btn btn-sm btn-primary" *ngIf="selectedDishes.length" (click)="confirmAllDishes()">Confirm all
+            dishes
         </button>
     </div>
 </div>
 
-<app-ingredients-modal
-    [modalOpen]="modalOpen"
-    (modalOpenOutput)="closeModal($event)"
-    (selectedIngredientsOutput)="addIngredientsToDish($event)"
-
-></app-ingredients-modal>
+    <app-ingredients-modal
+        [modalOpen]="modalOpen"
+        [removeIng]="removeIng"
+        [allDishIngredients]="selectedDishes[0]?.ingredients"
+        (modalOpenOutput)="closeModal($event)"
+        (selectedIngredientsToAddOutput)="addIngredientsToDish($event)"
+        (selectedIngredientsToRemoveOutput)="removeIngredientsFromDish($event)"
+    ></app-ingredients-modal>

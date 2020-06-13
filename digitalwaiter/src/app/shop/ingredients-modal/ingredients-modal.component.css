@@ -1,0 +1,9 @@
+.clr-textarea {
+    resize: none;
+    width: 500px;
+    height: 100px;
+}
+
+.clr-form-control {
+    margin-top: .0rem;
+}

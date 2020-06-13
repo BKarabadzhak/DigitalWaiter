@@ -1,13 +1,17 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CardService} from '../card.service';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {DataService} from '../../data.service';
+
+export interface IngredientsAndAmount {
+    ingredients: string[];
+    amount?: number;
+}
 
 @Component({
     selector: 'app-ingredients-modal',
     templateUrl: './ingredients-modal.component.html',
     styleUrls: ['./ingredients-modal.component.css']
 })
-export class IngredientsModalComponent implements OnInit {
+export class IngredientsModalComponent implements OnChanges {
 
     public ingredients: string[] = [];
     public selectedIngredients: string[] = [];
@@ -15,19 +19,32 @@ export class IngredientsModalComponent implements OnInit {
     @Input()
     modalOpen = false;
 
+    @Input()
+    removeIng = false;
+
+    @Input()
+    allDishIngredients: string[] = [];
+
     @Output()
     modalOpenOutput: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     @Output()
-    selectedIngredientsOutput: EventEmitter<string[]> = new EventEmitter<string[]>();
+    selectedIngredientsToAddOutput: EventEmitter<IngredientsAndAmount> = new EventEmitter<IngredientsAndAmount>();
+
+    @Output()
+    selectedIngredientsToRemoveOutput: EventEmitter<IngredientsAndAmount> = new EventEmitter<IngredientsAndAmount>();
 
     constructor(private dataService: DataService) {
     }
 
-    ngOnInit(): void {
-        this.dataService.allIngredients.subscribe((ing) => {
-            this.ingredients = ing;
-        });
+    ngOnChanges(changes: SimpleChanges): void {
+        if (this.removeIng) {
+            this.ingredients = this.allDishIngredients;
+        } else {
+            this.dataService.allIngredients.subscribe((ing) => {
+                this.ingredients = ing;
+            });
+        }
     }
 
     closeModal() {
@@ -36,8 +53,18 @@ export class IngredientsModalComponent implements OnInit {
     }
 
     addIngredients() {
-        this.selectedIngredientsOutput.emit(this.selectedIngredients);
+        const output: IngredientsAndAmount = {ingredients: this.selectedIngredients, amount: this.selectedIngredients.length * 0.5};
+        this.selectedIngredientsToAddOutput.emit(output);
         this.modalOpen = false;
         this.modalOpenOutput.emit(this.modalOpen);
+        this.selectedIngredients = [];
+    }
+
+    removeIngredients() {
+        const output: IngredientsAndAmount = {ingredients: this.selectedIngredients};
+        this.selectedIngredientsToRemoveOutput.emit(output);
+        this.modalOpen = false;
+        this.modalOpenOutput.emit(this.modalOpen);
+        this.selectedIngredients = [];
     }
 }

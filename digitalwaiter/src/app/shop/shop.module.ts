@@ -8,6 +8,7 @@ import {ContainerModule} from '../header/container.module';
 import {DishCardModule} from "../dish-card/dish-card.module";
 import { ListComponent } from './list/list.component';
 import { IngredientsModalComponent } from './ingredients-modal/ingredients-modal.component';
+import { PaymentComponent } from './payment/payment.component';
 
 const routes: Routes = [
     {
@@ -32,7 +33,8 @@ const routes: Routes = [
         ShopComponent,
         CreateOrderComponent,
         ListComponent,
-        IngredientsModalComponent
+        IngredientsModalComponent,
+        PaymentComponent
     ],
     imports: [
         CommonModule,

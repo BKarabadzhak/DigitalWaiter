@@ -4,6 +4,7 @@ import {ClickedHeaderService} from '../../header/clicked-header.service';
 import {Link} from '../../header/header.component';
 import {Router} from '@angular/router';
 import {CardService} from '../card.service';
+import {IngredientsAndAmount} from '../ingredients-modal/ingredients-modal.component';
 
 @Component({
     selector: 'app-list',
@@ -15,6 +16,7 @@ export class ListComponent implements OnInit {
     public selectedDishes: Dish[] = [];
     public confirmedIsVisible = true;
     public modalOpen = false;
+    public removeIng = false;
 
     constructor(public card: CardService, private clickedHeaderService: ClickedHeaderService, private router: Router) {
         this.clickedHeaderService.clickedObs.subscribe((link: Link) => {
@@ -34,8 +36,13 @@ export class ListComponent implements OnInit {
         this.selectedDishes = [];
     }
 
-    onEdit() {
+    onAddIng() {
         this.modalOpen = true;
+    }
+
+    onRemoveIng() {
+        this.modalOpen = true;
+        this.removeIng = true;
     }
 
     addNewDish() {
@@ -56,9 +63,14 @@ export class ListComponent implements OnInit {
 
     closeModal(b: boolean) {
         this.modalOpen = b;
+        this.removeIng = false;
     }
 
-    addIngredientsToDish(ing: string[]) {
-        this.card.addIngredients(this.selectedDishes[0], ing);
+    addIngredientsToDish(ingredientsAndAmount: IngredientsAndAmount) {
+        this.card.addIngredients(this.selectedDishes[0], ingredientsAndAmount);
+    }
+
+    removeIngredientsFromDish(ingredientsAndAmount: IngredientsAndAmount) {
+        this.card.removeIngredients(this.selectedDishes[0], ingredientsAndAmount);
     }
 }
