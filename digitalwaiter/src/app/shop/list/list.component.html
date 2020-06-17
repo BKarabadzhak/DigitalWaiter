@@ -1,8 +1,8 @@
 <div *ngIf="confirmedIsVisible">
     <clr-datagrid>
         <clr-dg-action-bar>
-            <button class="btn btn-sm btn-primary" (click)="showConfirmed()">Confirmed</button>
             <button class="btn btn-link btn-sm" (click)="showUnconfirmed()">Unconfirmed</button>
+            <button class="btn btn-sm btn-primary" (click)="showConfirmed()">Confirmed</button>
         </clr-dg-action-bar>
         <clr-dg-column>
             Dishes
@@ -18,15 +18,15 @@
     </clr-datagrid>
 
     <div>
-        <button class="btn btn-sm btn-primary" (click)="addNewDish()">+ Add new dish</button>
+        <button class="btn btn-sm btn-primary" (click)="addNewDish()">+ Select new dish</button>
     </div>
 </div>
 
 <div *ngIf="!confirmedIsVisible">
     <clr-datagrid [(clrDgSelected)]="selectedDishes">
         <clr-dg-action-bar>
-            <button class="btn btn-link btn-sm" (click)="showConfirmed()">Confirmed</button>
             <button class="btn btn-sm btn-primary" (click)="showUnconfirmed()">Unconfirmed</button>
+            <button class="btn btn-link btn-sm" (click)="showConfirmed()">Confirmed</button>
             <button type="button" class="btn btn-sm btn-secondary" (click)="onAddIng()"
                     *ngIf="selectedDishes?.length === 1">
                 <clr-icon shape="pencil"></clr-icon>
@@ -40,12 +40,7 @@
             <button type="button" class="btn btn-sm btn-secondary" (click)="onDelete()"
                     *ngIf="selectedDishes.length">
                 <clr-icon shape="times"></clr-icon>
-                Delete
-            </button>
-            <button type="button" class="btn btn-sm btn-secondary" (click)="confirmSelectedDishes()"
-                    *ngIf="selectedDishes.length">
-                <clr-icon shape="check"></clr-icon>
-                Confirm selected dishes
+                Remove selected dishes
             </button>
         </clr-dg-action-bar>
         <clr-dg-column>
@@ -62,18 +57,26 @@
     </clr-datagrid>
 
     <div>
-        <button class="btn btn-sm btn-primary" (click)="addNewDish()">+ Add new dish</button>
-        <button class="btn btn-sm btn-primary" *ngIf="selectedDishes.length" (click)="confirmAllDishes()">Confirm all
+        <button class="btn btn-sm btn-primary" (click)="addNewDish()">+ Select new dish</button>
+        <button class="btn btn-sm btn-primary" *ngIf="card.dishesInCardUnconfirmed.length" (click)="confirmAllDishes()">
+            Confirm all
             dishes
+        </button>
+        <button type="button" class="btn btn-sm btn-primary" (click)="confirmSelectedDishes()"
+                *ngIf="selectedDishes.length">
+            <clr-icon shape="check"></clr-icon>
+            Confirm selected dishes
         </button>
     </div>
 </div>
 
-    <app-ingredients-modal
-        [modalOpen]="modalOpen"
-        [removeIng]="removeIng"
-        [allDishIngredients]="selectedDishes[0]?.ingredients"
-        (modalOpenOutput)="closeModal($event)"
-        (selectedIngredientsToAddOutput)="addIngredientsToDish($event)"
-        (selectedIngredientsToRemoveOutput)="removeIngredientsFromDish($event)"
-    ></app-ingredients-modal>
+<app-ingredients-modal
+    [modalOpen]="modalOpen"
+    [removeIng]="removeIng"
+    [allDishIngredients]="selectedDishes[0]?.ingredients"
+    (modalOpenOutput)="closeModal($event)"
+    (selectedIngredientsToAddOutput)="addIngredientsToDish($event)"
+    (selectedIngredientsToRemoveOutput)="removeIngredientsFromDish($event)"
+></app-ingredients-modal>
+
+<button class="btn btn-outline" (click)="moveToPayment()">Move to payment</button>

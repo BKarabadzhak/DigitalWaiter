@@ -14,7 +14,7 @@ import {IngredientsAndAmount} from '../ingredients-modal/ingredients-modal.compo
 export class ListComponent implements OnInit {
 
     public selectedDishes: Dish[] = [];
-    public confirmedIsVisible = true;
+    public confirmedIsVisible = false;
     public modalOpen = false;
     public removeIng = false;
 
@@ -72,5 +72,9 @@ export class ListComponent implements OnInit {
 
     removeIngredientsFromDish(ingredientsAndAmount: IngredientsAndAmount) {
         this.card.removeIngredients(this.selectedDishes[0], ingredientsAndAmount);
+    }
+
+    moveToPayment() {
+        this.router.navigate(['/shop/payment']);
     }
 }
