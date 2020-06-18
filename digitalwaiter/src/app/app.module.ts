@@ -7,10 +7,12 @@ import {ClarityModule} from '@clr/angular';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ShopModule} from './shop/shop.module';
 import {AdminModule} from './admin/admin.module';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        WelcomeComponent
     ],
     imports: [
         BrowserModule,

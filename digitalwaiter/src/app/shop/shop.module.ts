@@ -9,12 +9,12 @@ import {DishCardModule} from '../dish-card/dish-card.module';
 import {ListComponent} from './list/list.component';
 import {IngredientsModalComponent} from './ingredients-modal/ingredients-modal.component';
 import {PaymentComponent} from './payment/payment.component';
+import {WelcomeComponent} from '../welcome/welcome.component';
 
 const routes: Routes = [
+    {path: 'welcome', component: WelcomeComponent},
     {
-        path: 'shop',
-        component: ShopComponent,
-        children: [
+        path: 'shop', component: ShopComponent, children: [
             {path: '', redirectTo: 'create-order', pathMatch: 'full'},
             {path: 'create-order', component: CreateOrderComponent},
             {path: 'list', component: ListComponent, children: [
