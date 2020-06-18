@@ -12,6 +12,9 @@ export class DataService {
     private typesSubj: BehaviorSubject<string[]>;
     public typesObs: Observable<string[]>
 
+    private paymentTypesSubj: BehaviorSubject<string[]>;
+    public paymentTypesObs: Observable<string[]>
+
     private allIngredientsSubj: BehaviorSubject<string[]>;
     public allIngredients: Observable<string[]>
 
@@ -21,6 +24,9 @@ export class DataService {
 
         this.typesSubj = new BehaviorSubject<string[]>(this.prepareFirstDishTypes());
         this.typesObs = this.typesSubj.asObservable();
+
+        this.paymentTypesSubj = new BehaviorSubject<string[]>(this.preparePaymentTypes());
+        this.paymentTypesObs = this.paymentTypesSubj.asObservable();
 
         this.allIngredientsSubj = new BehaviorSubject<string[]>(this.prepareIngredients());
         this.allIngredients = this.allIngredientsSubj.asObservable();
@@ -39,6 +45,13 @@ export class DataService {
             "drinks",
             "deserts",
             "spaghetti",
+        ]
+    }
+
+    private preparePaymentTypes(): string[] {
+        return [
+            "cash",
+            "card"
         ]
     }
 
@@ -63,6 +76,10 @@ export class DataService {
 
     public updateDishTypesArray(newArray: string[]) {
         this.typesSubj.next(newArray);
+    }
+
+    public updatePaymentTypesArray(newArray: string[]) {
+        this.paymentTypesSubj.next(newArray);
     }
 }
 

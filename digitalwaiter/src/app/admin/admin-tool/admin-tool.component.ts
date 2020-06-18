@@ -1,9 +1,14 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Dish} from "../../dish-card/dish-card.component";
 import {DataService} from "../../data.service";
 import {fromEvent, Subscription} from "rxjs";
 import {debounceTime} from "rxjs/operators";
 import {SaveModalComponent} from "../../save-modal/save-modal.component";
+
+interface Filter<T extends any, V extends any> {
+    filter(dish: T, value: V): boolean;
+    values: V[];
+}
 
 @Component({
     selector: 'app-admin-tool',
@@ -16,6 +21,8 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
     public dishes: Dish[];
     public immutableDishes: Dish[];
     public selectedPaymentType;
+    public paymentTypes: string[];
+    private filters = new Object();
 
     public set selectedDishType(type: string) {
         this.filterByType(type)
@@ -26,9 +33,9 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
         return this._selectedDishType;
     }
 
-
     @ViewChild("search") private searchInputField: ElementRef<HTMLInputElement>;
     @ViewChild("newDishType") private addDishTypeModal: SaveModalComponent<HTMLFormElement>;
+    @ViewChild("newPaymentType") private addPaymentTypeModal: SaveModalComponent<HTMLFormElement>;
 
     private subs = new Array<Subscription>();
     private _selectedDishType: string;
@@ -47,7 +54,13 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
             this.dishTypes= types;
         })
 
+        let paySub = this.dataService.paymentTypesObs.subscribe(types => {
+            this.paymentTypes= types;
+        })
+
         this.subs.push(sub);
+        this.subs.push(typeSub);
+        this.subs.push(paySub);
     }
 
     ngAfterViewInit(): void {
@@ -70,21 +83,56 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
 
     filterByType(type: string) {
         if(!type) {
-            this.dishes = this.immutableDishes;
+            delete this.filters["type"];
+            this.filterDishes();
+            return;
         }
 
-        this.dishes = this.immutableDishes.filter((dish: Dish) => {
-            return dish.type.toLowerCase() === type.toLowerCase();
-        })
+        const filter = (dish: Dish, value: string) => {
+            return dish.type.toLowerCase() === value.toLowerCase();
+        };
+
+        this.filters["type"] = {
+            filter,
+            values: [type]
+        };
+        this.filterDishes();
     }
 
     filterByName(value: string) {
         if(!value) {
+            delete this.filters["name"];
+            this.filterDishes();
+            return;
+        }
+
+        const filter = (dish: Dish, value: string) => {
+            return dish.name.toLowerCase().includes(value.toLowerCase());
+        };
+
+        this.filters["name"] = {
+            filter,
+            values: [value]
+        };
+        this.filterDishes();
+    }
+
+    filterDishes() {
+        const keys = Object.keys(this.filters);
+        if(keys.length === 0) {
             this.dishes = this.immutableDishes;
+            return;
         }
 
         this.dishes = this.immutableDishes.filter((dish: Dish) => {
-            return dish.name.toLowerCase().includes(value.toLowerCase());
+            let filtered = true;
+            keys.forEach((key) => {
+                const filter = this.filters[key];
+                if(!filter.filter(dish, filter.values[0])) {
+                    filtered = false;
+                }
+            });
+            return filtered;
         });
     }
 
@@ -92,8 +140,31 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
         this.addDishTypeModal.openModal();
     }
 
+    openNewPaymentModal() {
+        this.addPaymentTypeModal.openModal();
+    }
+
     addNewDishType(value: HTMLInputElement) {
         this.dishTypes.push(value['newDishType'].value);
         this.dataService.updateDishTypesArray(this.dishTypes);
+    }
+
+    deleteType() {
+        const typeIndx = this.dishTypes.findIndex((type) => this.selectedDishType === type);
+        this.selectedDishType = null;
+        this.dishTypes.splice(typeIndx, 1);
+        this.dataService.updateDishTypesArray(this.dishTypes);
+    }
+
+    addNewPaymentType(value) {
+        this.paymentTypes.push(value['newPaymentType'].value);
+        this.dataService.updatePaymentTypesArray(this.paymentTypes);
+    }
+
+    deletePaymentType() {
+        const typeIndx = this.paymentTypes.findIndex((type) => this.selectedPaymentType === type);
+        this.selectedPaymentType = null;
+        this.paymentTypes.splice(typeIndx, 1);
+        this.dataService.updatePaymentTypesArray(this.paymentTypes);
     }
 }

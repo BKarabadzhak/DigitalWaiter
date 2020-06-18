@@ -15,7 +15,8 @@
         <clr-datagrid [(clrDgSingleSelected)]="selectedDishType">
             <clr-dg-action-bar>
                 <button class="btn btn-link btn-sm" (click)="openNewDishModal()">Add</button>
-                <button class="btn btn-link btn-sm" [disabled]="!selectedDishType">Delete</button>
+                <button class="btn btn-link btn-sm" [disabled]="!selectedDishType" (click)="deleteType()">Delete</button>
+                <button class="btn btn-link btn-sm" [disabled]="!selectedDishType" (click)="selectedDishType = null">Clear Filter</button>
             </clr-dg-action-bar>
             <clr-dg-column>
                 Filter dishes by type
@@ -30,13 +31,14 @@
 
         <clr-datagrid [(clrDgSingleSelected)]="selectedPaymentType">
             <clr-dg-action-bar>
-                <button class="btn btn-link btn-sm">Add</button>
-                <button class="btn btn-link btn-sm" [disabled]="!selectedPaymentType">Delete</button>
+                <button class="btn btn-link btn-sm" (click)="openNewPaymentModal()">Add</button>
+                <button class="btn btn-link btn-sm" [disabled]="!selectedPaymentType" (click)="deletePaymentType()">Delete</button>
+                <button class="btn btn-link btn-sm" [disabled]="!selectedPaymentType" (click)="selectedPaymentType = null">Clear Filter</button>
             </clr-dg-action-bar>
             <clr-dg-column>
                 Payment methods
             </clr-dg-column>
-            <clr-dg-row *clrDgItems="let type of dishTypes"
+            <clr-dg-row *clrDgItems="let type of paymentTypes"
                         [clrDgItem]="type">
                 <clr-dg-cell>{{type}}</clr-dg-cell>
             </clr-dg-row>
@@ -47,8 +49,15 @@
 <app-save-modal #newDishType [title]="'Add Dish Type'" (okClicked)="addNewDishType($event)">
     <form #form>
         <clr-input-container>
-            <label>Search</label>
             <input clrInput name="newDishType"/>
+        </clr-input-container>
+    </form>
+</app-save-modal>
+
+<app-save-modal #newPaymentType [title]="'Add Payment Type'" (okClicked)="addNewPaymentType($event)">
+    <form #form>
+        <clr-input-container>
+            <input clrInput name="newPaymentType"/>
         </clr-input-container>
     </form>
 </app-save-modal>
