@@ -8,6 +8,7 @@ import {AdminToolComponent} from './admin-tool/admin-tool.component';
 import {DishCardModule} from "../dish-card/dish-card.module";
 import {SaveModalModule} from "../save-modal/save-modal.module";
 import { QueueComponent } from './queue/queue.component';
+import { ChangeDishComponent } from './change-dish/change-dish.component';
 
 const routes: Routes = [
     {
@@ -35,7 +36,8 @@ const routes: Routes = [
     declarations: [
         AdminComponent,
         AdminToolComponent,
-        QueueComponent
+        QueueComponent,
+        ChangeDishComponent
     ],
     imports: [
         CommonModule,

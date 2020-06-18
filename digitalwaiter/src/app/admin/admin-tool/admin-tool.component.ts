@@ -175,6 +175,15 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
         this.deleteDishModal.openModal();
     }
 
+    addNewDish(dish) {
+        this.dishes.push(dish);
+        this.dataService.updateDishesArray(this.dishes);
+    }
+
+    updateDish() {
+        this.dataService.updateDishesArray(this.dishes);
+    }
+
     deleteDish() {
         const typeIndx = this.dishes.findIndex((value) => this.dishForDelete === value);
         this.dishForDelete = null;
