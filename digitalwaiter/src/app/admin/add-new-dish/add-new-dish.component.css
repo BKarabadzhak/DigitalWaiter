@@ -1,0 +1,18 @@
+.clr-textarea {
+    resize: none;
+    width: 500px;
+    height: 100px;
+}
+
+.clr-form-control {
+    margin-top: .0rem;
+}
+
+.clr-control-label {
+    margin-top: 23px;
+    margin-bottom: 10px;
+}
+
+input.inp {
+    margin-top: 23px;
+}

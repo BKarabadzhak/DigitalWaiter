@@ -1,0 +1,70 @@
+<clr-modal [(clrModalOpen)]="modalIsOpen" [clrModalClosable]="false">
+    <h3 class="modal-title">Create new dish</h3>
+    <div class="modal-body">
+        <form class="clr-form">
+            <div class="clr-form-control">
+                <label for="basic" class="clr-control-label">Dish name</label>
+                <div class="clr-control-container">
+                    <div class="clr-input-wrapper">
+                        <input type="text" [(ngModel)]="dishName" name="dishName" id="basic" placeholder="Enter name here" class="clr-input">
+                        <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                    </div>
+                </div>
+
+                <label for="vertical-textarea-basic" class="clr-control-label">Dish description</label>
+                <div class="clr-control-container">
+                    <div class="clr-textarea-wrapper">
+                                <textarea id="vertical-textarea-basic" [(ngModel)]="dishDescription" name="dishDescription" placeholder="Enter dish description here"
+                                          class="clr-textarea"></textarea>
+                        <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                    </div>
+                </div>
+
+                <label for="basic" class="clr-control-label">Image URL</label>
+                <div class="clr-control-container">
+                    <div class="clr-input-wrapper">
+                        <input type="text" [(ngModel)]="fileUrl" name="fileUrl" id="basic" placeholder="Enter image url" class="clr-input">
+                        <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                    </div>
+                </div>
+
+                <clr-select-container>
+                    <label>Select dish type</label>
+                    <select clrSelect name="options" [(ngModel)]="dishType" required>
+                        <option value="main">Main</option>
+                        <option value="soups">Soups</option>
+                        <option value="drinks">Drinks</option>
+                        <option value="deserts">Deserts</option>
+                        <option value="spaghetti">Spaghetti</option>
+                    </select>
+                    <clr-control-error>This field is required!</clr-control-error>
+                </clr-select-container>
+
+                <label for="basic" class="clr-control-label">Price</label>
+                <div class="clr-control-container">
+                    <div class="clr-input-wrapper">
+                        <input type="number" [(ngModel)]="price" name="price" id="basic" placeholder="Enter price here" class="clr-input">
+                        <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+        <clr-datagrid [(clrDgSelected)]="selectedIngredients">
+            <clr-dg-action-bar>
+            </clr-dg-action-bar>
+            <clr-dg-column>
+                Ingredients to add
+            </clr-dg-column>
+            <clr-dg-row *clrDgItems="let type of ingredients"
+                        [clrDgItem]="type">
+                <clr-dg-cell>{{type}}</clr-dg-cell>
+            </clr-dg-row>
+        </clr-datagrid>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="closeModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="addDish()">Add</button>
+    </div>
+</clr-modal>

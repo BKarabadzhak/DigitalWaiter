@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Dish} from '../../dish-card/dish-card.component';
 import {ClickedHeaderService} from '../../header/clicked-header.service';
 import {Link} from '../../header/header.component';
