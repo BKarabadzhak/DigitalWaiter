@@ -1,0 +1,43 @@
+<clr-modal [(clrModalOpen)]="open">
+    <h3 class="modal-title">{{title}}</h3>
+    <div class="modal-body">
+        <form #form>
+            <clr-input-container>
+                <label>Name</label>
+                <input clrInput [name]="formFields.name"/>
+            </clr-input-container>
+            <clr-input-container>
+                <label>Description</label>
+                <input clrInput [name]="formFields.description"/>
+            </clr-input-container>
+            <clr-input-container>
+                <label>Price</label>
+                <input clrInput type="number" [name]="formFields.price"/>
+            </clr-input-container>
+            <clr-input-container>
+                <label>Image URL</label>
+                <input clrInput type="url" [name]="formFields.imgUrl"/>
+            </clr-input-container>
+
+            <clr-select-container>
+                <label>Type</label>
+                <select clrSelect [name]="formFields.type">
+                    <option *ngFor="let type of types" value="{{type}}">type</option>
+                </select>
+            </clr-select-container>
+
+            <clr-datagrid [(clrDgSelected)]="selectedIngredients">
+                <clr-dg-row *ngFor="let ing of ingredients" [clrDgItem]="ing">
+                    <clr-dg-cell>
+                        {{ing}}
+                    </clr-dg-cell>
+                </clr-dg-row>
+            </clr-datagrid>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="onCancel()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onOk()">Ok</button>
+    </div>
+</clr-modal>
