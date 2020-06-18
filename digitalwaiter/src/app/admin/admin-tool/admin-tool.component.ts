@@ -22,6 +22,7 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
     public immutableDishes: Dish[];
     public selectedPaymentType;
     public paymentTypes: string[];
+    public dishForDelete: Dish;
     private filters = new Object();
 
     public set selectedDishType(type: string) {
@@ -36,6 +37,7 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild("search") private searchInputField: ElementRef<HTMLInputElement>;
     @ViewChild("newDishType") private addDishTypeModal: SaveModalComponent<HTMLFormElement>;
     @ViewChild("newPaymentType") private addPaymentTypeModal: SaveModalComponent<HTMLFormElement>;
+    @ViewChild("deleteDishModal") private deleteDishModal: SaveModalComponent<HTMLFormElement>;
 
     private subs = new Array<Subscription>();
     private _selectedDishType: string;
@@ -166,5 +168,17 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
         this.selectedPaymentType = null;
         this.paymentTypes.splice(typeIndx, 1);
         this.dataService.updatePaymentTypesArray(this.paymentTypes);
+    }
+
+    openDeleteDishModal(dish) {
+        this.dishForDelete = dish;
+        this.deleteDishModal.openModal();
+    }
+
+    deleteDish() {
+        const typeIndx = this.dishes.findIndex((value) => this.dishForDelete === value);
+        this.dishForDelete = null;
+        this.dishes.splice(typeIndx, 1);
+        this.dataService.updateDishesArray(this.dishes);
     }
 }

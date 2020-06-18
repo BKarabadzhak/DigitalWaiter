@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CardService} from '../shop/card.service';
 
 export interface Dish {
@@ -20,6 +20,8 @@ export class DishCardComponent implements OnInit {
     @Input() public dish: Dish;
     @Input() public isAdminView = false;
 
+    @Output() public deleteClicked = new EventEmitter();
+
     constructor(private card: CardService) {
     }
 
@@ -28,5 +30,9 @@ export class DishCardComponent implements OnInit {
 
     addOrder() {
         this.card.addToCard(this.dish);
+    }
+
+    onDeleteClick() {
+        this.deleteClicked.emit();
     }
 }

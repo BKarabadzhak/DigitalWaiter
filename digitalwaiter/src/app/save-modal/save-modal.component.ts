@@ -32,7 +32,11 @@ export class SaveModalComponent<T> {
     }
 
     public onOk() {
-        this.okClicked.emit(this.form.nativeElement);
+        if(this.form) {
+            this.okClicked.emit(this.form.nativeElement);
+        } else {
+            this.okClicked.emit();
+        }
         this.closeModal();
     }
 

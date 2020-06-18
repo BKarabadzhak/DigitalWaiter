@@ -2,7 +2,10 @@
 <div class="clr-row">
     <div class="clr-col-md-7">
         <div class="clr-row">
-            <app-dish-card *ngFor="let dish of dishes" [dish]="dish" isAdminView="true"></app-dish-card>
+            <app-dish-card *ngFor="let dish of dishes"
+                           [dish]="dish"
+                           (deleteClicked)="openDeleteDishModal(dish)"
+                           isAdminView="true"></app-dish-card>
         </div>
     </div>
     <div class="clr-col-md-5">
@@ -60,4 +63,8 @@
             <input clrInput name="newPaymentType"/>
         </clr-input-container>
     </form>
+</app-save-modal>
+
+<app-save-modal #deleteDishModal [title]="'Add Payment Type'" (okClicked)="deleteDish()">
+    Are you sure that you want to delete this dish?
 </app-save-modal>
