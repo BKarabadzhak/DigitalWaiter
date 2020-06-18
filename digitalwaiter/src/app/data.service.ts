@@ -18,6 +18,9 @@ export class DataService {
     private allIngredientsSubj: BehaviorSubject<string[]>;
     public allIngredients: Observable<string[]>
 
+    private queueSubj: BehaviorSubject<Dish[]>;
+    public queueObs: Observable<Dish[]>
+
     constructor() {
         this.dishesSubj = new BehaviorSubject<Dish[]>(this.prepareFirstData());
         this.dishesObs = this.dishesSubj.asObservable();
@@ -30,6 +33,9 @@ export class DataService {
 
         this.allIngredientsSubj = new BehaviorSubject<string[]>(this.prepareIngredients());
         this.allIngredients = this.allIngredientsSubj.asObservable();
+
+        this.queueSubj = new BehaviorSubject<Dish[]>(null);
+        this.queueObs = this.queueSubj.asObservable();
     }
 
     private prepareFirstData(): Dish[] {
@@ -80,6 +86,10 @@ export class DataService {
 
     public updatePaymentTypesArray(newArray: string[]) {
         this.paymentTypesSubj.next(newArray);
+    }
+
+    public updateQueue(newArray: Dish[]) {
+        this.queueSubj.next(newArray);
     }
 }
 

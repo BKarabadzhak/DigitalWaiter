@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Dish} from '../dish-card/dish-card.component';
 import {IngredientsAndAmount} from './ingredients-modal/ingredients-modal.component';
+import {DataService} from "../data.service";
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +12,7 @@ export class CardService {
     public dishesInCardUnconfirmed: Dish[] = [];
     public totalAmount = 0;
 
-    constructor() {
+    constructor(private dataService: DataService) {
     }
 
     public addToCard(item: Dish) {
@@ -63,5 +64,6 @@ export class CardService {
             this.dishesInCardConfirmed.push(item);
         });
         this.dishesInCardUnconfirmed = [];
+        this.dataService.updateQueue(this.dishesInCardConfirmed);
     }
 }

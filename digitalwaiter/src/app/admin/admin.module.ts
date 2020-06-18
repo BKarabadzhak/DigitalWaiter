@@ -7,6 +7,7 @@ import {ContainerModule} from "../header/container.module";
 import {AdminToolComponent} from './admin-tool/admin-tool.component';
 import {DishCardModule} from "../dish-card/dish-card.module";
 import {SaveModalModule} from "../save-modal/save-modal.module";
+import { QueueComponent } from './queue/queue.component';
 
 const routes: Routes = [
     {
@@ -21,6 +22,10 @@ const routes: Routes = [
             {
                 path: "general",
                 component: AdminToolComponent
+            },
+            {
+                path: "queue",
+                component: QueueComponent
             }
         ]
     }
@@ -29,7 +34,8 @@ const routes: Routes = [
 @NgModule({
     declarations: [
         AdminComponent,
-        AdminToolComponent
+        AdminToolComponent,
+        QueueComponent
     ],
     imports: [
         CommonModule,

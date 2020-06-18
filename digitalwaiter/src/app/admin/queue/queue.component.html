@@ -1,0 +1,20 @@
+<clr-datagrid [(clrDgSingleSelected)]="selectedDish">
+    <clr-dg-action-bar>
+        <div class="btn-group">
+            <button class="btn btn-sm" (click)="delete()">Delete</button>
+            <button class="btn btn-sm" (click)="selectedDish = null">Clear Selection</button>
+        </div>
+    </clr-dg-action-bar>
+    <br>
+    <clr-dg-column>
+        Dishes
+    </clr-dg-column>
+    <clr-dg-column>
+        Ingredients
+    </clr-dg-column>
+    <clr-dg-row *clrDgItems="let dish of dishes"
+                [clrDgItem]="dish">
+        <clr-dg-cell>{{dish.name}}</clr-dg-cell>
+        <clr-dg-cell>{{dish.ingredients}}</clr-dg-cell>
+    </clr-dg-row>
+</clr-datagrid>
