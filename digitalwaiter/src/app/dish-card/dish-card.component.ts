@@ -21,6 +21,7 @@ export class DishCardComponent implements OnInit {
     @Input() public isAdminView = false;
 
     @Output() public deleteClicked = new EventEmitter();
+    @Output() public changeClicked = new EventEmitter();
 
     constructor(private card: CardService) {
     }
@@ -34,5 +35,9 @@ export class DishCardComponent implements OnInit {
 
     onDeleteClick() {
         this.deleteClicked.emit();
+    }
+
+    onChangeClick() {
+        this.changeClicked.emit();
     }
 }
