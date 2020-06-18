@@ -15,6 +15,9 @@ export class AddNewDishComponent implements OnInit {
     @Output()
     modalOpenOutput: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+    @Output()
+    dishOutput: EventEmitter<Dish> = new EventEmitter<Dish>();
+
     public ingredients: string[] = [];
     public selectedIngredients: string[] = [];
     fileUrl: string;
@@ -49,6 +52,9 @@ export class AddNewDishComponent implements OnInit {
 
         this.closeModal();
         this.selectedIngredients = [];
+        
+        this.dishOutput.emit(dishToAdd);
+        this.modalOpenOutput.emit(this.modalIsOpen);
     }
 
 }
