@@ -1,4 +1,4 @@
-<button class="btn btn-outline">Add new Dish</button>
+<button class="btn btn-outline" (click)="openNewDishModal()">Add new Dish</button>
 <div class="clr-row">
     <div class="clr-col-md-7">
         <div class="clr-row">
@@ -18,7 +18,7 @@
 
         <clr-datagrid [(clrDgSingleSelected)]="selectedDishType">
             <clr-dg-action-bar>
-                <button class="btn btn-link btn-sm" (click)="openNewDishModal()">Add</button>
+                <button class="btn btn-link btn-sm" (click)="openNewDishTypeModal()">Add</button>
                 <button class="btn btn-link btn-sm" [disabled]="!selectedDishType" (click)="deleteType()">Delete</button>
                 <button class="btn btn-link btn-sm" [disabled]="!selectedDishType" (click)="selectedDishType = null">Clear Filter</button>
             </clr-dg-action-bar>
@@ -71,3 +71,5 @@
 </app-save-modal>
 
 <app-change-dish #changeDishModal title="Change Dish" (okClicked)="updateDish($event)"></app-change-dish>
+
+<app-add-new-dish [modalIsOpen]="openNewDishModalBoolean" (modalOpenOutput)="openNewDishModalBoolean = false" (dishOutput)="addNewDish($event)"></app-add-new-dish>

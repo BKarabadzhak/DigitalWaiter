@@ -24,6 +24,7 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
     public selectedPaymentType;
     public paymentTypes: string[];
     public dishForDelete: Dish;
+    public openNewDishModalBoolean: boolean = false
     private filters = new Object();
 
     public set selectedDishType(type: string) {
@@ -140,7 +141,7 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
         });
     }
 
-    openNewDishModal() {
+    openNewDishTypeModal() {
         this.addDishTypeModal.openModal();
     }
 
@@ -197,5 +198,9 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
 
     openChangeDishModal(dish) {
         this.changeDishModal.openModal(dish);
+    }
+
+    public openNewDishModal() {
+        this.openNewDishModalBoolean = true;
     }
 }
