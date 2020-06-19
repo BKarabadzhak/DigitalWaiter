@@ -22,12 +22,16 @@
             <clr-select-container>
                 <label>Type</label>
                 <select clrSelect [name]="formFields.type">
-                    <option *ngFor="let type of types" value="{{type}}">type</option>
+                    <option *ngFor="let type of types" [value]="type">{{type}}</option>
                 </select>
             </clr-select-container>
 
+            <br>
+
             <clr-datagrid [(clrDgSelected)]="selectedIngredients">
-                <clr-dg-row *ngFor="let ing of ingredients" [clrDgItem]="ing">
+                <clr-dg-column>Ingredients</clr-dg-column>
+                <clr-dg-row *clrDgItems="let ing of ingredients"
+                            [clrDgItem]="ing">
                     <clr-dg-cell>
                         {{ing}}
                     </clr-dg-cell>

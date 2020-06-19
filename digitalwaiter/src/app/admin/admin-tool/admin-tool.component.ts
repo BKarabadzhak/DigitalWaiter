@@ -4,6 +4,7 @@ import {DataService} from "../../data.service";
 import {fromEvent, Subscription} from "rxjs";
 import {debounceTime} from "rxjs/operators";
 import {SaveModalComponent} from "../../save-modal/save-modal.component";
+import {ChangeDishComponent, ChangeDishEvent} from "../change-dish/change-dish.component";
 
 interface Filter<T extends any, V extends any> {
     filter(dish: T, value: V): boolean;
@@ -38,6 +39,7 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild("newDishType") private addDishTypeModal: SaveModalComponent<HTMLFormElement>;
     @ViewChild("newPaymentType") private addPaymentTypeModal: SaveModalComponent<HTMLFormElement>;
     @ViewChild("deleteDishModal") private deleteDishModal: SaveModalComponent<HTMLFormElement>;
+    @ViewChild("changeDishModal") private changeDishModal: ChangeDishComponent;
 
     private subs = new Array<Subscription>();
     private _selectedDishType: string;
@@ -176,18 +178,24 @@ export class AdminToolComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     addNewDish(dish) {
-        this.dishes.push(dish);
-        this.dataService.updateDishesArray(this.dishes);
+        this.immutableDishes.push(dish);
+        this.dataService.updateDishesArray(this.immutableDishes);
     }
 
-    updateDish() {
-        this.dataService.updateDishesArray(this.dishes);
+    updateDish(event: ChangeDishEvent) {
+        const dishIndx = this.immutableDishes.findIndex((dish) => dish.name === event.oldDishName);
+        this.immutableDishes[dishIndx] = event.newDish;
+        this.dataService.updateDishesArray(this.immutableDishes);
     }
 
     deleteDish() {
-        const typeIndx = this.dishes.findIndex((value) => this.dishForDelete === value);
+        const typeIndx = this.immutableDishes.findIndex((value) => this.dishForDelete === value);
         this.dishForDelete = null;
-        this.dishes.splice(typeIndx, 1);
-        this.dataService.updateDishesArray(this.dishes);
+        this.immutableDishes.splice(typeIndx, 1);
+        this.dataService.updateDishesArray(this.immutableDishes);
+    }
+
+    openChangeDishModal(dish) {
+        this.changeDishModal.openModal(dish);
     }
 }
