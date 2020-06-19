@@ -49,14 +49,14 @@ export class IngredientsModalComponent implements OnChanges {
 
     closeModal() {
         this.modalOpen = false;
+        this.selectedIngredients = [];
         this.modalOpenOutput.emit(this.modalOpen);
     }
 
     addIngredients() {
         const output: IngredientsAndAmount = {ingredients: this.selectedIngredients, amount: this.selectedIngredients.length * 0.5};
         this.selectedIngredientsToAddOutput.emit(output);
-        this.modalOpen = false;
-        this.modalOpenOutput.emit(this.modalOpen);
+        this.closeModal();
         this.selectedIngredients = [];
     }
 
